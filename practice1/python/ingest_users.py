@@ -1,16 +1,3 @@
-"""Level 4: pull users from randomuser.me and load them into Postgres.
-
-The API returns deeply nested JSON. Only the ``name`` and ``location``
-objects are required, and they are flattened to a single level by joining
-the key path with "_", so ``location.coordinates.latitude`` becomes
-``location_coordinates_latitude``.
-
-Run it with:
-    docker compose exec py python ingest_users.py --count 25
-"""
-
-from __future__ import annotations
-
 import argparse
 import os
 import sys
@@ -24,8 +11,6 @@ from db import create_db_engine
 
 FIELDS_OF_INTEREST = ("name", "location")
 
-# The columns the users table actually has. Anything else the API starts
-# returning is reported and skipped rather than silently dropped.
 TARGET_COLUMNS = (
     "name_title",
     "name_first",
@@ -51,7 +36,6 @@ INSERT_SQL = text(
 
 
 def flatten(value: Any, prefix: str = "", separator: str = "_") -> Iterator[tuple[str, Any]]:
-    """Yield (column_name, scalar) pairs for an arbitrarily nested mapping."""
     if isinstance(value, dict):
         for key, nested in value.items():
             child = f"{prefix}{separator}{key}" if prefix else str(key)
@@ -61,7 +45,6 @@ def flatten(value: Any, prefix: str = "", separator: str = "_") -> Iterator[tupl
 
 
 def fetch_users(api_url: str, count: int, seed: str | None = None) -> list[dict[str, Any]]:
-    """Fetch ``count`` users in a single call and return the raw records."""
     params: dict[str, Any] = {"results": count}
     if seed:
         params["seed"] = seed
@@ -71,7 +54,6 @@ def fetch_users(api_url: str, count: int, seed: str | None = None) -> list[dict[
 
 
 def to_row(record: dict[str, Any]) -> dict[str, Any]:
-    """Flatten one API record down to the columns of the users table."""
     wanted = {key: record[key] for key in FIELDS_OF_INTEREST if key in record}
     flat = dict(flatten(wanted))
 
@@ -83,13 +65,9 @@ def to_row(record: dict[str, Any]) -> dict[str, Any]:
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument(
-        "--count", type=int, default=10, help="number of users to fetch (default: 10)"
-    )
-    parser.add_argument(
-        "--seed", default=None, help="randomuser.me seed, for reproducible runs"
-    )
+    parser = argparse.ArgumentParser(description="Load users from randomuser.me into Postgres")
+    parser.add_argument("--count", type=int, default=10, help="number of users to fetch")
+    parser.add_argument("--seed", default=None, help="randomuser.me seed for repeatable runs")
     args = parser.parse_args()
 
     api_url = os.environ.get("API_URL", "https://randomuser.me/api/")
@@ -104,8 +82,6 @@ def main() -> int:
 
     engine = create_db_engine()
     try:
-        # One transaction for the whole batch: either every user lands or none
-        # does, so a failed run never leaves a half loaded table behind.
         with engine.begin() as conn:
             conn.execute(INSERT_SQL, rows)
             total = conn.execute(text("SELECT count(*) FROM users")).scalar_one()

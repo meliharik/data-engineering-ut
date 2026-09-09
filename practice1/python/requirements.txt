@@ -1,5 +1,3 @@
-# Kept in sync with the inline pip install in compose.yml, which is pinned
-# there so that the compose file runs on its own.
 sqlalchemy>=2.0.34
 psycopg2-binary>=2.9.9
 requests>=2.32.3

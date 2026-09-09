@@ -1,9 +1,6 @@
--- Level 3: bulk load the static countries dataset with Postgres COPY.
--- COPY runs server side, so /data/countries.csv is a path inside the db
--- container (mounted read only by compose.yml).
-
 TRUNCATE countries;
 
+-- path is inside the db container, COPY runs server side
 COPY countries (
     id, name, iso3, iso2, numeric_code, phonecode, capital,
     currency, currency_name, currency_symbol, tld, native,

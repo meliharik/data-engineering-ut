@@ -1,15 +1,7 @@
--- Level 3 and level 4: target tables.
---
--- Both tables are created explicitly instead of letting a dataframe library
--- infer them, because inference turns identifiers such as postcodes into
--- integers and drops their leading zeros.
-
 DROP VIEW IF EXISTS user_country_coordinates;
-
--- Mirrors the column order of the upstream countries.csv, which is required
--- by COPY. Source: github.com/dr5hn/countries-states-cities-database
 DROP TABLE IF EXISTS countries;
 
+-- column order must match countries.csv for COPY
 CREATE TABLE countries (
     id                 INTEGER PRIMARY KEY,
     name               TEXT NOT NULL,
@@ -41,14 +33,8 @@ CREATE TABLE countries (
     wikidata_id        TEXT
 );
 
--- numeric_code and phonecode stay TEXT on purpose: they are identifiers with
--- meaningful leading zeros ("004"), not quantities.
-
 CREATE INDEX countries_name_lower_idx ON countries (lower(name));
 
--- Flattened subset of the randomuser.me payload. Nested objects are collapsed
--- with "_", so results[0].location.coordinates.latitude becomes
--- location_coordinates_latitude.
 CREATE TABLE IF NOT EXISTS users (
     id                             BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     name_title                     TEXT,

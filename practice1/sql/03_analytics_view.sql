@@ -1,9 +1,3 @@
--- Level 5: join the ingested users to the reference countries dataset.
---
--- The API returns a plausible looking but unusable coordinate pair for each
--- user, so the view keeps the reported values next to the reference centroid
--- of the matching country and exposes the corrected pair for downstream use.
-
 CREATE OR REPLACE VIEW user_country_coordinates AS
 SELECT
     u.id                             AS user_id,
@@ -21,8 +15,6 @@ SELECT
     COALESCE(c.longitude, u.location_coordinates_longitude) AS corrected_longitude,
     (c.id IS NOT NULL)               AS country_matched
 FROM users AS u
--- LEFT JOIN keeps users whose country label has no counterpart in the
--- reference data, which makes the mismatches visible instead of silently
--- dropping rows.
+-- LEFT JOIN so unmatched country labels stay visible instead of vanishing
 LEFT JOIN countries AS c
        ON lower(btrim(u.location_country)) = lower(c.name);

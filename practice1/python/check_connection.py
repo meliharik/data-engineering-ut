@@ -1,11 +1,3 @@
-"""Level 2: prove that the Python container can reach Postgres.
-
-Run it with:
-    docker compose exec py python check_connection.py
-"""
-
-from __future__ import annotations
-
 import sys
 
 from sqlalchemy import text
