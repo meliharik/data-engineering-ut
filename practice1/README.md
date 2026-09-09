@@ -149,3 +149,8 @@ untouched instead of half populated.
 ## Submission
 
 `compose.yml` only, uploaded to the Practice 1 assignment on Moodle.
+
+The assignment text in the course repository says the file is due by 18:00 on
+the day of the practice. That deadline was extended on the announcements forum
+to 9 September 2026 at 23:59, because many machines in the session could not
+run Docker. Moodle allows up to 10 submission attempts.

@@ -16,6 +16,30 @@ Weeks follow OIS numbering. Week 2 begins on 7 September 2026.
 | 11   | Guest lecture and exam preparation        | Exam, two options, in person |
 | 13   | Poster session and exam retake            |                    |
 
+## Moodle section names
+
+Moodle organises the course into these sections, which do not line up with the
+OIS plan above from week 10 onward. OIS puts data visualization in week 10 and
+a guest lecture with exam preparation in week 11, while Moodle lists data lakes,
+security and privacy, and data governance in those slots. Worth confirming with
+the staff before relying on either for weeks 10 to 13.
+
+1. Introduction to Data Engineering
+2. Data Architecture and Modeling
+3. Dimensional Modelling
+4. Week 5: Data Engineering Design Practices (no class this week)
+5. Data Processing and Orchestration
+6. Week 7: Data Storage, OLAP
+7. Data Transformation
+8. Semi structured Data
+9. Week 10: Data Lakes
+10. Week 11: Security and Privacy
+11. Week 12: Data Governance
+12. Data Visualization
+
+Only the first section is open. Everything after it is still marked as not
+available.
+
 ## Material folders
 
 The course repository is organised by topic rather than by week.

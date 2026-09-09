@@ -27,10 +27,14 @@ no Slack workspace for this course.
 Lectures are pre recorded and close with a quiz. The quiz has to be completed
 before the corresponding practice session.
 
-**Practice.** Tuesday 16:15 to 18:00 in rooms 1006 and 1019 as parallel groups,
-plus one online group with weekly pre registration on Moodle. Practice sessions
-are mandatory and work commitments are not accepted as a reason for missing
-them.
+**Practice.** Tuesday 16:15 to 18:00 in rooms 1006 and 1019 as parallel groups.
+Practice sessions are mandatory, and for a full time student a work commitment
+is not accepted as a justification for missing one.
+
+The course email announced a third, online group with weekly pre registration.
+That group did not run in week 2. Staff confirmed on the Q&A forum that there
+would be no online session and that a recording would be published instead, so
+the registration form is not needed for now.
 
 ## Grading
 
@@ -75,10 +79,19 @@ through the university O'Reilly access at https://utlib.ut.ee/en/oreilly
 | 11   | Chapter 10                                   |
 | 13   | Chapter 9                                    |
 
+## Assignment history
+
+| Date        | Source            | Note                                        |
+| ----------- | ----------------- | ------------------------------------------- |
+| 8 Sep 2026  | Announcements     | Practice 1 deadline extended to 9 Sep 23:59, because many machines could not run Docker in the session |
+| 8 Sep 2026  | Q&A               | No online practice in week 2, a recording follows instead |
+| 9 Sep 2026  | Announcements     | Docker practice video link fixed and now accessible |
+
 ## Academic integrity
 
 The public course repository already contains reference solutions for the
-practices. Submitting one unchanged has been raised on the Q&A forum as a
-plagiarism concern. Everything in this repository is written independently,
-and the differences from any published reference are documented in the design
-notes of each practice.
+practices. A student asked on the Q&A forum on 9 September 2026 whether
+submitting an identical solution counts as plagiarism. That question is still
+unanswered, so the safe reading applies: everything in this repository is
+written independently, and the differences from any published reference are
+documented in the design notes of each practice.
